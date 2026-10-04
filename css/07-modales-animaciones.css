@@ -1,0 +1,169 @@
+/* Confirmaciones, animaciones y títulos */
+/* ---- Cuadro de confirmación (reemplaza los mensajes del navegador) ---- */
+.confirm-overlay{display:none; position:fixed; inset:0; z-index:300; align-items:center; justify-content:center; padding:18px; background:rgba(4,8,14,.72); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);}
+.confirm-overlay.open{display:flex; animation:cfFade .15s ease;}
+.confirm-box{width:100%; max-width:420px; background:var(--card); color:var(--text); border:1px solid var(--border); border-radius:14px; padding:26px 24px 22px; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,.55); animation:cfPop .18s ease;}
+.confirm-icon{font-size:40px; line-height:1;}
+.confirm-title{font-family:'Barlow Condensed'; font-size:28px; font-weight:800; margin:10px 0 6px; line-height:1.1;}
+.confirm-msg{font-size:14.5px; line-height:1.5; color:var(--muted); margin:0 0 22px;}
+.confirm-actions{display:flex; gap:12px;}
+.confirm-actions button{flex:1; padding:12px 14px; border-radius:9px; border:2px solid transparent; font-size:15px; font-weight:800; font-family:inherit; color:#fff; transition:filter .15s, transform .15s, box-shadow .15s;}
+.confirm-actions .cf-ok{background:#1f9d55; border-color:#1f9d55;}
+.confirm-actions .cf-cancel{background:#d6343a; border-color:#d6343a;}
+.confirm-actions button:hover{filter:brightness(1.12); transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.35);}
+.confirm-actions button:active{transform:translateY(0); box-shadow:none;}
+.confirm-actions button:focus-visible{outline:3px solid #fff; outline-offset:2px;}
+@keyframes cfFade{from{opacity:0}to{opacity:1}}
+@keyframes cfPop{from{opacity:0; transform:scale(.94) translateY(8px)}to{opacity:1; transform:none}}
+
+/* =========================================================
+   ANIMACIONES SUAVES
+   Regla general: se anima lo que APARECE (pantallas, tarjetas, modales, jugadas) y los cambios de estado;
+   las listas que se redibujan completas en cada acción no se animan, para evitar parpadeos.
+========================================================= */
+html{scroll-behavior:smooth;}
+@keyframes riseIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+@keyframes fadeOnly{from{opacity:0;} to{opacity:1;}}
+@keyframes feIn{from{opacity:0; transform:translateX(-8px);} to{opacity:1; transform:none;}}
+@keyframes tokenIn{from{opacity:0; scale:.5;} to{opacity:1; scale:1;}}
+@keyframes scoreBump{0%{transform:scale(1);} 35%{transform:scale(1.28); color:var(--gold);} 100%{transform:scale(1);}}
+@keyframes cfFadeOut{to{opacity:0;}}
+@keyframes cfPopOut{to{opacity:0; transform:scale(.95) translateY(6px);}}
+
+/* Entrada escalonada del contenido de cada pantalla (en la liga solo opacidad: un transform rompería la barra fija) */
+.screen.active > *{animation:riseIn .38s cubic-bezier(.2,.7,.2,1) backwards;}
+.screen.active > *:nth-child(2){animation-delay:.04s;}
+.screen.active > *:nth-child(3){animation-delay:.08s;}
+.screen.active > *:nth-child(4){animation-delay:.12s;}
+.screen.active > *:nth-child(5){animation-delay:.16s;}
+.screen.active > *:nth-child(6){animation-delay:.2s;}
+.screen.active > *:nth-child(n+7){animation-delay:.24s;}
+#screen-league.active > *{animation-name:fadeOnly;}
+
+/* Bloques que se muestran u ocultan según las opciones elegidas */
+#freeMarketBox, #finalLegCard, #opt-leg-3, #opt-leg-4, #marketTeamsLayout, #marketFreeLayout{animation:riseIn .3s ease;}
+
+/* Pasos de arriba */
+.step, .step .num{transition:background-color .3s ease, color .3s ease, border-color .3s ease;}
+
+/* Botón de tema */
+.theme-toggle{transition:transform .3s cubic-bezier(.3,1.4,.5,1), border-color .2s ease, box-shadow .2s ease;}
+.theme-toggle:hover{transform:rotate(20deg) scale(1.08);}
+.theme-toggle:active{transform:rotate(-30deg) scale(.92);}
+
+/* Cambio de tema: los colores se funden en vez de saltar (la clase se pone solo unos instantes) */
+.theme-anim *, .theme-anim *::before, .theme-anim *::after{
+  transition:background-color .4s ease, color .4s ease, border-color .4s ease, box-shadow .4s ease, fill .4s ease, stroke .4s ease !important;}
+
+/* Modales: aparecen y se cierran con fundido + zoom suave */
+.squad-modal.open{animation:cfFade .2s ease;}
+.squad-modal.open .squad-dialog{animation:cfPop .26s cubic-bezier(.2,.8,.2,1);}
+.squad-modal.closing{animation:cfFadeOut .19s ease forwards;}
+.squad-modal.closing .squad-dialog{animation:cfPopOut .19s ease forwards;}
+.confirm-overlay.closing{animation:cfFadeOut .14s ease forwards;}
+.confirm-overlay.closing .confirm-box{animation:cfPopOut .14s ease forwards;}
+#squadBody > *{animation:fadeOnly .25s ease;}
+
+/* Plantillas: las fichas aparecen en cascada y se deslizan al cambiar de formación */
+.ptoken{animation:tokenIn .35s cubic-bezier(.2,.9,.3,1.2) backwards; animation-delay:calc(var(--i,0) * 28ms);
+  transition:left .55s cubic-bezier(.4,0,.2,1), top .55s cubic-bezier(.4,0,.2,1);}
+.ptoken.drag{transition:none;}
+
+/* Partidos en vivo: tarjetas que entran, jugadas que se deslizan y marcador que "salta" con cada gol */
+.live-card{animation:riseIn .35s ease backwards;}
+.live-grid .live-card:nth-child(2){animation-delay:.05s;}
+.live-grid .live-card:nth-child(3){animation-delay:.1s;}
+.live-grid .live-card:nth-child(n+4){animation-delay:.15s;}
+.live-feed .fe{animation:feIn .28s ease;}
+.live-score .ls{display:inline-block;}
+.live-score .ls.bump{animation:scoreBump .55s ease;}
+
+/* Campeón */
+.champion-card{animation:pop .6s cubic-bezier(.2,1.4,.4,1) backwards;}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  .screen.active > *, #freeMarketBox, #finalLegCard, #opt-leg-3, #opt-leg-4, #marketTeamsLayout, #marketFreeLayout,
+  .squad-modal, .squad-modal .squad-dialog, .confirm-overlay.closing, .confirm-overlay.closing .confirm-box, #squadBody > *,
+  .ptoken, .live-card, .live-feed .fe, .live-score .ls.bump, .champion-card{animation:none !important;}
+  .ptoken, .theme-toggle, .step, .step .num{transition:none !important;}
+}
+.btn:focus-visible,.opt-card:focus-visible,.home-card:focus-visible{outline:2px solid var(--grass); outline-offset:2px;}
+/* Títulos: tipografía minimalista y elegante (solo títulos; números, precios y marcadores siguen con Barlow Condensed) */
+h1,h2,h3,.brand-name,.home-card .t,.home-sub-title,.squad-title,.confirm-title,.awards-title{font-family:'Jost','Inter',system-ui,sans-serif; font-weight:500; letter-spacing:.4px;}
+.home-title-row{position:relative; display:flex; align-items:center; justify-content:center; min-height:340px; margin-top:6px; isolation:isolate;}
+.home-title-img{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); height:130%; width:auto; max-width:none; z-index:-1; object-fit:cover; opacity:.55; pointer-events:none;
+  -webkit-mask-image:radial-gradient(ellipse closest-side at 50% 50%, #000 40%, transparent 100%); mask-image:radial-gradient(ellipse closest-side at 50% 50%, #000 40%, transparent 100%);}
+.home-title-row h1{margin:0 !important; position:relative; z-index:1; text-shadow:0 2px 24px rgba(0,0,0,.85), 0 0 6px rgba(0,0,0,.6);}
+@media (max-width:860px){.home-title-row{min-height:240px;}}
+/* ---- Modo claro: botones oscuros para que contrasten con el fondo ---- */
+:root[data-theme="light"]{--btn-dark:#1f3049; --btn-dark-hover:#2c4163; --btn-dark-border:#142033;}
+:root[data-theme="light"] .btn:not(.primary):not(.gold):not(.pause-on),
+:root[data-theme="light"] .count-btn,
+:root[data-theme="light"] .mk-tab:not(.on),
+:root[data-theme="light"] .speed-btn:not(.on),
+:root[data-theme="light"] .squad-chip:not(.on){
+  background:var(--btn-dark); color:#fff; border-color:var(--btn-dark-border);
+  box-shadow:0 1px 2px rgba(20,32,51,.25);
+}
+:root[data-theme="light"] .btn:not(.primary):not(.gold):not(.pause-on):not(:disabled):hover,
+:root[data-theme="light"] .count-btn:hover,
+:root[data-theme="light"] .mk-tab:not(.on):hover,
+:root[data-theme="light"] .speed-btn:not(.on):hover,
+:root[data-theme="light"] .squad-chip:not(.on):hover{
+  background:var(--btn-dark-hover); color:#fff; border-color:var(--btn-dark-border);
+}
+:root[data-theme="light"] .bottom-actions .btn:not(:disabled):hover{color:#ff9a9d; border-color:var(--red);}
+:root[data-theme="light"] .btn.primary,
+:root[data-theme="light"] .btn.gold,
+:root[data-theme="light"] .btn.pause-on,
+:root[data-theme="light"] .speed-btn.on,
+:root[data-theme="light"] .mk-tab.on,
+:root[data-theme="light"] .squad-chip.on{box-shadow:0 1px 3px rgba(20,32,51,.35);}
+:root[data-theme="light"] .btn.primary,
+:root[data-theme="light"] .btn.primary:not(:disabled):hover{background:#0b7a3f; border-color:#0b7a3f; color:#fff;}
+:root[data-theme="light"] .btn.gold,
+:root[data-theme="light"] .btn.gold:not(:disabled):hover{background:#9a6700; border-color:#9a6700; color:#fff;}
+:root[data-theme="light"] .squad-team-btn{border-color:#8fa3bf; box-shadow:0 1px 2px rgba(20,32,51,.15);}
+/* ---- Modo claro: la foto del inicio casi no se ve afectada ---- */
+:root[data-theme="light"] .home-title-img{opacity:.95;}
+:root[data-theme="light"] .home-title-row h1{color:#fff; text-shadow:0 2px 24px rgba(0,0,0,.85), 0 0 6px rgba(0,0,0,.6);}
+
+/* ---- Menú de inicio: transición tipo diapositiva (los botones bajan y entran los siguientes) ---- */
+.home-menu{overflow:visible; position:relative; z-index:3;}
+.home-hero{position:relative; z-index:1;}
+@keyframes homeOutDown{from{opacity:1; transform:translateY(0);} to{opacity:0; transform:translateY(70px);}}
+@keyframes homeInDown{from{opacity:0; transform:translateY(-70px);} to{opacity:1; transform:translateY(0);}}
+@keyframes homeOutUp{from{opacity:1; transform:translateY(0);} to{opacity:0; transform:translateY(-70px);}}
+@keyframes homeInUp{from{opacity:0; transform:translateY(70px);} to{opacity:1; transform:translateY(0);}}
+.home-menu .hp-out-down{animation:homeOutDown .26s ease-in forwards; pointer-events:none;}
+.home-menu .hp-in-down{animation:homeInDown .32s cubic-bezier(.2,.8,.3,1) both;}
+.home-menu .hp-out-up{animation:homeOutUp .26s ease-in forwards; pointer-events:none;}
+.home-menu .hp-in-up{animation:homeInUp .32s cubic-bezier(.2,.8,.3,1) both;}
+@media (prefers-reduced-motion: reduce){
+  .home-menu .hp-out-down,.home-menu .hp-in-down,.home-menu .hp-out-up,.home-menu .hp-in-up{animation:none !important;}
+}
+/* ---- Inicio: botones dorados (modo oscuro y claro) ---- */
+:root .home-menu .home-card{
+  background:linear-gradient(180deg,#f7cf3a 0%,#e0a800 100%);
+  border-color:#b88700; color:#2a1d00;
+  box-shadow:0 2px 6px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.45);
+}
+:root .home-menu .home-card .d{color:#4a3500;}
+:root .home-menu .home-card:hover{
+  background:linear-gradient(180deg,#ffdb55 0%,#eab308 100%);
+  border-color:#8a6400;
+  box-shadow:0 5px 14px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.55);
+}
+:root .home-menu .home-back .btn{
+  background:#e0a800 !important; border-color:#b88700 !important; color:#2a1d00 !important;
+  box-shadow:0 1px 3px rgba(0,0,0,.25);
+}
+:root .home-menu .home-back .btn:hover{background:#eab308 !important; border-color:#8a6400 !important;}
+
+/* ---- Inicio: 3 estrellas bajo el título ---- */
+.home-title-row{flex-direction:column;}
+.home-stars{position:relative; z-index:1; display:flex; gap:10px; justify-content:center; margin-top:10px;
+  font-size:34px; line-height:1; color:#f5c518;
+  text-shadow:0 2px 10px rgba(0,0,0,.7), 0 0 14px rgba(245,197,24,.45);}
+@media (max-width:860px){.home-stars{font-size:28px; gap:8px;}}

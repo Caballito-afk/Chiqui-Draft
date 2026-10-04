@@ -1,0 +1,139 @@
+/* Campeón, descenso, sonido, tabla animada y detalles */
+/* ---- Modo oscuro: dorado de los botones del inicio menos saturado ---- */
+:root:not([data-theme="light"]) .home-menu .home-card{
+  background:linear-gradient(180deg,#d6bf75 0%,#b99c48 100%);
+  border-color:#8f7730; color:#241b06;
+  box-shadow:0 2px 6px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.3);
+}
+:root:not([data-theme="light"]) .home-menu .home-card .d{color:#3f3213;}
+:root:not([data-theme="light"]) .home-menu .home-card:hover{
+  background:linear-gradient(180deg,#dfca85 0%,#c4a652 100%);
+  border-color:#a58a38;
+  box-shadow:0 5px 14px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.35);
+}
+:root:not([data-theme="light"]) .home-menu .home-back .btn{
+  background:#b99c48 !important; border-color:#8f7730 !important; color:#241b06 !important;
+}
+:root:not([data-theme="light"]) .home-menu .home-back .btn:hover{background:#c4a652 !important; border-color:#a58a38 !important;}
+/* ---- País del jugador bien visible en las pujas (arriba de la posición) ---- */
+.country-tag .cflag{height:.82em; width:auto; border-radius:3px; vertical-align:-.1em; margin-right:4px; box-shadow:0 0 0 1px rgba(255,255,255,.4);}
+.country-tag{display:inline-block; margin:0 0 8px; padding:6px 18px; border-radius:999px;
+  font-family:'Barlow Condensed','Inter',sans-serif; font-size:24px; font-weight:800; letter-spacing:.6px; line-height:1.1;
+  color:#fff; background:linear-gradient(135deg,#3a6fd8,#2350b5); border:1px solid rgba(255,255,255,.25);
+  box-shadow:0 2px 10px rgba(35,80,181,.45);}
+:root[data-theme="light"] .country-tag{background:linear-gradient(135deg,#2c5fca,#1b3f8f); border-color:#142a63;}
+@media (max-width:640px){.country-tag{font-size:21px; padding:5px 14px;}}
+/* ---- Campeón: plantel en miniatura, como lo dejó armado ----
+   Todo el contenido se ajusta al alto de la pantalla para no tener que bajar. */
+.celebrate{--vh:100vh; align-items:center;}
+@supports (height:100dvh){.celebrate{--vh:100dvh;}}
+.celebrate .cel-card{max-width:520px; display:flex; flex-direction:column; align-items:center;}
+.celebrate .cel-trophy{font-size:clamp(34px,7vh,56px);}
+.celebrate .cel-kicker{font-size:clamp(14px,2.6vh,20px); letter-spacing:2px; margin-top:2px;}
+.celebrate .cel-name{font-size:clamp(26px,5.6vh,46px); margin:2px 0 10px;}
+.cel-pitch{
+  --w:clamp(170px, min(340px, 88vw, calc((var(--vh) - 300px) * .8333)), 340px);
+  width:var(--w); font-size:calc(var(--w) / 340 * 10px); margin:0 auto 12px;
+  border:2px solid rgba(255,255,255,.85); box-shadow:0 8px 30px rgba(0,0,0,.5); flex-shrink:0;}
+/* Fichas más compactas para que nombres y círculos de la media no se pisen entre vecinos
+   (el nombre tiene un tamaño mínimo en px para que siga siendo legible en pantallas chicas) */
+.cel-pitch .ptoken{width:5em; cursor:default; pointer-events:none; gap:.1em;}
+.cel-pitch .ptoken .disc{width:2em; height:2em; border-width:1.5px; box-shadow:0 1px 3px rgba(0,0,0,.45);}
+.cel-pitch .ptoken .disc small{font-size:.48em;}
+.cel-pitch .ptoken .disc b{font-size:1em;}
+.cel-pitch .ptoken .pn{font-size:max(6.5px,.68em); max-width:5em; padding:.03em .25em; border-radius:.4em; line-height:1.1; background:rgba(8,14,22,.85);}
+.celebrate .btn-row{margin-top:0;}
+.celebrate .bottom-actions{margin-top:12px !important; padding-top:10px; border-top:none;}
+
+/* ---- Eliminado (modo Un jugador): mismo formato que el festejo, pero triste ---- */
+:root[data-theme] .celebrate.sad{background:radial-gradient(800px 500px at 50% 35%, rgba(91,141,239,.16), rgba(3,5,9,.97) 70%), #05080c;}
+.celebrate.sad .cel-trophy{animation:sadDroop 3.2s ease-in-out infinite; filter:drop-shadow(0 0 22px rgba(91,141,239,.45));}
+@keyframes sadDroop{0%,100%{transform:translateY(0) rotate(-4deg);} 50%{transform:translateY(8px) rotate(3deg) scale(.96);}}
+.celebrate.sad .cel-kicker{color:var(--muted);}
+.celebrate.sad .cel-name{color:#8497b8; text-shadow:0 0 40px rgba(91,141,239,.35); letter-spacing:2px; animation:sadIn 1.1s ease both;}
+@keyframes sadIn{from{transform:translateY(-14px); opacity:0;} to{transform:none; opacity:1;}}
+.celebrate .sad-sub{color:var(--muted); font-size:clamp(12px,2.2vh,15px); margin:-2px 0 10px; max-width:420px; line-height:1.35;}
+.celebrate.sad .cel-pitch{filter:grayscale(.9) brightness(.75);}
+.celebrate .sad-actions{display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}
+/* Descenso (Liga, Un jugador): todavía más triste */
+:root[data-theme] .celebrate.sad.sadder{background:radial-gradient(800px 500px at 50% 35%, rgba(70,90,130,.14), rgba(1,2,4,.99) 70%), #020306;}
+.celebrate.sad.sadder .cel-trophy{animation:sadderDroop 4.5s ease-in-out infinite; filter:grayscale(.7) drop-shadow(0 0 16px rgba(91,141,239,.3));}
+@keyframes sadderDroop{0%,100%{transform:translateY(0) rotate(-2deg) scale(.95);} 50%{transform:translateY(12px) rotate(2deg) scale(.9);}}
+.celebrate.sad.sadder .cel-kicker{color:#6f819f; letter-spacing:4px;}
+.celebrate.sad.sadder .cel-name{color:#6f819f; letter-spacing:4px; text-shadow:0 0 30px rgba(91,141,239,.22); animation:sadderIn 2.2s ease both;}
+@keyframes sadderIn{0%{transform:translateY(-26px); opacity:0;} 100%{transform:none; opacity:1;}}
+.celebrate.sad.sadder .sad-sub{color:#8296b3;}
+.celebrate .sad-extra{color:#6f819f; font-style:italic; font-size:clamp(12px,2.1vh,14px); margin:0 0 12px; opacity:0; animation:fadeOnly 2s ease 1.6s forwards;}
+.celebrate.sad.sadder .cel-pitch{filter:grayscale(1) brightness(.55);}
+@media (prefers-reduced-motion: reduce){ .celebrate.sad .cel-trophy,.celebrate.sad .cel-name{animation:none;} .celebrate .sad-extra{animation:none; opacity:1;} }
+
+/* ---- Equipos descendidos (modo Liga), arriba del campeón ---- */
+.relegated-card{margin-top:10px; text-align:center; background:linear-gradient(135deg, rgba(229,72,77,.14), rgba(229,72,77,.03)); border:1px solid rgba(229,72,77,.4); border-radius:14px; padding:22px 24px; animation:pop .6s cubic-bezier(.2,1.4,.4,1) backwards;}
+.relegated-card .rel-icon{font-size:34px; line-height:1;}
+.relegated-card .rel-kicker{color:var(--muted); margin-top:6px; font-size:12px; font-weight:800; letter-spacing:.8px; text-transform:uppercase;}
+.relegated-card .rel-list{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:12px;}
+.relegated-card .rel-team{display:inline-flex; align-items:center; gap:8px; padding:6px 16px; border-radius:999px; background:var(--card); border:1px solid rgba(229,72,77,.45); font-family:'Barlow Condensed'; font-size:24px; font-weight:800; color:var(--red);}
+.relegated-card .rel-team small{font-family:'Inter',system-ui,sans-serif; font-size:12px; font-weight:700; color:var(--muted);}
+:root[data-theme="light"] .relegated-card{background:linear-gradient(135deg, rgba(242,92,97,.2), rgba(242,92,97,.06)); border-color:#9f1d1d;}
+:root[data-theme="light"] .relegated-card .rel-team{color:#b3262b; border-color:#b3262b;}
+@media (prefers-reduced-motion: reduce){ .relegated-card{animation:none;} }
+
+/* Botón de sonido (a la izquierda del botón de tema) */
+.sound-toggle{position:fixed; right:68px; bottom:14px; z-index:60; width:44px; height:44px; border-radius:50%;
+  border:1px solid var(--border); background:var(--card); color:var(--text); font-size:20px; line-height:1;
+  display:flex; align-items:center; justify-content:center; box-shadow:0 4px 14px rgba(0,0,0,.25); padding:0;}
+.sound-toggle:hover{border-color:var(--grass);}
+@media (min-width:1101px){
+  body:has(#screen-league.active .league-layout:not(.side-hidden)) .sound-toggle{right:calc(var(--side-w) + 68px);}
+  .side-anim .sound-toggle{transition:right .3s ease;}
+}
+
+/* ---- Tabla de posiciones animada ---- */
+#standingsTable tbody tr{position:relative;}
+#standingsTable tbody tr.moving{z-index:2;}
+@keyframes ptsPop{0%{transform:scale(1);} 35%{transform:scale(1.55); color:var(--grass);} 100%{transform:scale(1);}}
+#standingsTable td.pts.pts-up{animation:ptsPop .9s ease-out;}
+.rk-delta{display:inline-block; font-size:10px; font-weight:800; margin-left:2px; opacity:0; animation:rkFade 2.6s ease-out forwards; vertical-align:middle;}
+.rk-delta.up{color:var(--grass);} .rk-delta.down{color:var(--red);}
+@keyframes rkFade{0%{opacity:0; transform:translateY(4px);} 12%{opacity:1; transform:none;} 75%{opacity:1;} 100%{opacity:0;}}
+@media (prefers-reduced-motion:reduce){
+  #standingsTable td.pts.pts-up{animation:none;}
+}
+/* ---- Botón de jornadas automáticas ---- */
+.btn.auto-btn{background:transparent; border-color:var(--blue); color:var(--blue); font-weight:700;}
+.btn.auto-btn:hover{background:rgba(91,141,239,.14); border-color:var(--blue);}
+.btn.auto-btn.running{background:var(--gold); border-color:var(--gold); color:#241a00; animation:autoPulse 1.4s ease-in-out infinite;}
+@keyframes autoPulse{0%,100%{box-shadow:0 0 0 0 rgba(240,185,11,.55);} 50%{box-shadow:0 0 0 7px rgba(240,185,11,0);}}
+/* Mientras corre el modo automático, el resto de botones de la liga quedan bloqueados */
+body.auto-sim #prevMd, body.auto-sim #nextMd, body.auto-sim #simMdBtn, body.auto-sim #simAllBtn,
+body.auto-sim #goPlayoffsBtn, body.auto-sim #screen-league .squad-btn,
+body.auto-sim #screen-league .menu-btn, body.auto-sim #screen-league .restart-btn{opacity:.4; cursor:not-allowed;}
+
+/* ---- Distintivo de tu equipo (modo Un jugador) ---- */
+.you-tag{display:inline-block; flex-shrink:0; margin:0 5px; padding:1px 6px; border-radius:5px; font-size:9.5px; font-weight:800;
+  letter-spacing:.4px; line-height:1.4; background:var(--blue); color:#fff; vertical-align:middle; font-style:normal;}
+.team-cell .you-tag,.match-team .you-tag{margin:0 0 0 2px;}
+.champion-card .you-tag{font-size:12px; padding:2px 8px; margin-left:10px;}
+#standingsTable tbody tr.me td{font-weight:800;}
+.match-card.has-me{box-shadow:0 0 0 1.5px var(--blue);}
+:root .bracket-match.has-me, :root .live-card.has-me{border-color:var(--blue); box-shadow:0 0 0 1px var(--blue);}
+.bm-row.me{background:rgba(91,141,239,.16); font-weight:800;}
+
+/* ---- Easter egg: festejo de Argentina ---- */
+#easterStar{cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent; transition:transform .15s;}
+#easterStar:hover{transform:scale(1.2);}
+#easterStar:active{transform:scale(.9);}
+.arg-flag{position:relative; width:min(240px,64%); height:clamp(46px,9vh,72px); border-radius:8px; margin:6px 0 10px;
+  background:linear-gradient(#75aadb 0 33.4%, #fff 33.4% 66.6%, #75aadb 66.6%); box-shadow:0 6px 24px rgba(117,170,219,.45);
+  animation:pop .7s cubic-bezier(.2,1.6,.4,1) both;}
+.arg-flag::after{content:""; position:absolute; left:50%; top:50%; width:clamp(16px,3.2vh,24px); height:clamp(16px,3.2vh,24px); border-radius:50%;
+  transform:translate(-50%,-50%); background:radial-gradient(circle,#f6b40e 55%,#e39b00 100%); box-shadow:0 0 0 3px rgba(246,180,14,.35), 0 0 14px rgba(246,180,14,.7);}
+.celebrate .arg-name{color:#75aadb; letter-spacing:3px; margin-bottom:12px;}
+.arg-name .c{color:#75aadb; text-shadow:0 0 34px rgba(117,170,219,.75);}
+.arg-name .w{color:#fff; text-shadow:0 0 34px rgba(255,255,255,.65);}
+.arg-years{display:flex; flex-direction:column; align-items:center; gap:clamp(2px,.8vh,8px); margin-bottom:6px;}
+.arg-year{font-family:'Barlow Condensed'; font-size:clamp(34px,8vh,64px); font-weight:800; line-height:1.05; color:#f6c515;
+  text-shadow:0 0 24px rgba(246,197,21,.55); animation:pop .6s cubic-bezier(.2,1.6,.4,1) both;}
+.arg-year:nth-child(1){animation-delay:.35s;} .arg-year:nth-child(2){animation-delay:.55s;} .arg-year:nth-child(3){animation-delay:.75s;}
+.arg-stars{color:#f6c515; font-size:clamp(18px,3.6vh,28px); letter-spacing:8px; margin-bottom:6px; text-shadow:0 0 14px rgba(246,197,21,.6);}
+@media (prefers-reduced-motion: reduce){ .arg-flag,.arg-year{animation:none;} }

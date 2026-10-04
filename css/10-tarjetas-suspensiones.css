@@ -1,0 +1,26 @@
+/* Grupos, suspendidos en plantillas y XI inline */
+.match-card[data-grp]{position:relative}
+.match-card[data-grp]::before{content:"Grupo " attr(data-grp);position:absolute;top:1px;right:8px;font-size:9px;font-weight:800;color:var(--gold,#f0b90b);letter-spacing:.4px}
+.ptoken.susp{cursor:not-allowed;filter:grayscale(1);opacity:.5;touch-action:auto}
+.ptoken.susp .disc{position:relative}
+.ptoken.susp .disc::after{content:"🚫";position:absolute;inset:-6px;display:flex;align-items:center;justify-content:center;font-size:40px;line-height:1;filter:none;opacity:1}
+.ptoken.susp .susp-tag{font-size:8.5px;font-weight:800;color:#fff;background:rgba(214,59,65,.9);border-radius:5px;padding:0 5px}
+.multi-pitch{display:flex;flex-wrap:nowrap;gap:10px;justify-content:center;align-items:flex-start;margin:10px 0 4px;width:100%}
+.multi-pitch .mp-team{flex:0 1 auto;min-width:0;text-align:center}
+.multi-pitch .mp-name{font-weight:800;font-size:clamp(10px,2.4vw,14px);margin-bottom:4px;line-height:1.1;max-width:var(--mw)}
+.multi-pitch .cel-pitch{--w:var(--mw);margin:0 auto}
+.celebrate .cel-card.wide{max-width:min(96vw,1200px)}
+.xi-inline{margin-top:12px}
+.xi-inline .xi-sub{text-align:center;color:var(--muted,#a9bad3);font-size:13px;margin:0 0 10px}
+.xi-inline .pitch{border:2px solid rgba(255,255,255,.85)}
+.xi-inline .ptoken{cursor:default;pointer-events:none}
+.xi-inline{margin-top:6px}
+.xi-inline .xi-sub{font-size:12px;margin-bottom:6px}
+.xi-inline .pitch{max-width:400px}
+.xi-inline .ptoken{width:70px;gap:1px}
+.xi-inline .ptoken .disc{width:30px;height:30px;border-width:1.5px}
+.xi-inline .ptoken .disc small{font-size:7px}
+.xi-inline .ptoken .disc b{font-size:12.5px}
+.xi-inline .ptoken .pn{font-size:8.5px;max-width:74px;padding:0 4px}
+.xi-inline .ptoken .pc{font-size:7.5px;max-width:74px;padding:0 4px}
+.xi-inline .ptoken .pc{max-width:96px;padding:1px 6px;border-radius:6px;color:#fff;font-size:9.5px;font-weight:800;line-height:1.15;text-align:center;overflow-wrap:anywhere;text-shadow:0 1px 2px rgba(0,0,0,.7);box-shadow:0 1px 3px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.55)}

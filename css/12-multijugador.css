@@ -1,0 +1,84 @@
+/* =========================================================
+   MULTIJUGADOR ONLINE (salas con código)
+========================================================= */
+.onl-wrap{max-width:760px; margin:0 auto; padding:8px 0 40px;}
+.onl-panel{display:none;}
+.onl-panel.on{display:block;}
+.onl-title{font-family:'Barlow Condensed',sans-serif; font-size:34px; font-weight:800; letter-spacing:.3px; margin:6px 0 4px;}
+.onl-sub{color:var(--muted); margin-bottom:18px;}
+.onl-msg{min-height:18px; margin-top:10px; font-size:13px; color:var(--muted);}
+.onl-msg.err{color:#ff7a7a;}
+.onl-wrap .btn-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;}
+.onl-code-input{width:100%; font-family:'Barlow Condensed',monospace; font-size:34px; font-weight:800; letter-spacing:8px; text-align:center; text-transform:uppercase;}
+.onl-limits{display:flex; gap:40px; flex-wrap:wrap;}
+.onl-lim-t{font-size:12.5px; color:var(--muted); margin-bottom:6px;}
+.onl-kind{font-size:12.5px; color:var(--muted); margin-bottom:14px;}
+.onl-kind.warn{color:#e8b64c;}
+.onl-codebox{display:flex; align-items:center; gap:18px; flex-wrap:wrap; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px 18px; margin-bottom:14px;}
+.onl-code-lbl{font-size:12px; color:var(--muted); width:100%; margin-bottom:-8px;}
+.onl-code{font-family:'Barlow Condensed',monospace; font-size:44px; font-weight:800; letter-spacing:9px;}
+.onl-cfg{margin:0; padding-left:18px; color:var(--muted); font-size:14px; line-height:1.7;}
+.onl-player{display:flex; align-items:center; gap:10px; padding:8px 4px; border-bottom:1px solid var(--border);}
+.onl-player:last-child{border-bottom:0;}
+.onl-player .tag{width:26px; height:26px; border-radius:7px; display:grid; place-items:center; font-weight:800; font-size:13px; color:#0b1220;}
+.onl-player .nm{flex:1; font-weight:600;}
+.onl-player .bd{font-size:11px; padding:2px 8px; border-radius:99px; background:var(--card2); border:1px solid var(--border); color:var(--muted);}
+.onl-player.off{opacity:.5;}
+
+/* ---- en partida ---- */
+#mirrorRoot{display:contents;}
+body.onl-guest > :not(#mirrorRoot):not(#onlineUI):not(#musicUI):not(#squadModal):not(#celebrate):not(script){display:none !important;}
+/* controles que solo maneja el anfitrión: el invitado no los ve */
+body.onl-guest .restart-btn, body.onl-guest [data-host-only],
+body.onl-guest #auctionBackBtn, body.onl-guest #miniBackBtn, body.onl-guest #marketMenuBtn, body.onl-guest #endMarketBtn,
+/* #prevMd, #nextMd, #goPlayoffsBtn y #viewLeagueBtn SÍ los ve el invitado: los resuelve en forma local */
+body.onl-guest #drawSkipBtn, body.onl-guest #drawGoBtn, body.onl-guest #simMdBtn, body.onl-guest #autoMdBtn,
+body.onl-guest #simAllBtn, body.onl-guest #simPlayoffsBtn,
+body.onl-guest .speed-group, body.onl-guest #pauseLiveBtn, body.onl-guest #skipLiveBtn{display:none !important;}
+body.onl-on .offer-field:has(#offBidder), body.onl-on .offer-field:has(#freeBidder){display:none;}
+#onlChip{position:fixed; left:12px; bottom:12px; z-index:9998; display:flex; align-items:center; gap:10px; background:var(--card); color:var(--text); border:1px solid var(--border); border-radius:99px; padding:7px 8px 7px 14px; font-size:13px; box-shadow:0 6px 24px rgba(0,0,0,.35);}
+#onlChip button{border:0; border-radius:99px; padding:5px 12px; background:var(--card2); color:var(--text); cursor:pointer; font-size:12px; border:1px solid var(--border);}
+#onlChip .warn{color:#e8b64c;}
+#onlToast{position:fixed; left:50%; top:16px; transform:translateX(-50%); z-index:9999; background:var(--card); color:var(--text); border:1px solid var(--border); border-radius:12px; padding:10px 16px; font-size:14px; box-shadow:0 6px 24px rgba(0,0,0,.4); display:none; max-width:90vw;}
+#onlToast.show{display:block;}
+
+/* ---- "Todos pasan": en una sala online no se usa (ni el anfitrión lo ve) ---- */
+body.onl-on .bid-all{display:none !important;}
+
+/* ---- Menú online (unirse / crear / modos): mismo diseño que el inicio, botones a la izquierda y el título a la derecha ---- */
+.onl-wrap:has(> .onl-home.on){max-width:none;}
+.onl-home .home{min-height:76vh;}
+
+/* ---- Cartel de eliminado (multijugador) ---- */
+#onlElim{z-index:9990;}
+
+/* ---- Invitado: la pantalla espejada no está dentro de .main, así que se le da el mismo margen ---- */
+body.onl-guest #mirrorRoot > .screen{box-sizing:border-box; width:100%; max-width:1200px; margin:0 auto; padding:26px 30px 96px;}
+
+/* ---- Nombre del club (en el lateral del inicio): compacto, con los 2 botones lado a lado ---- */
+.onl-name-box{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:12px 14px 6px; margin-bottom:4px;}
+.onl-name-box label{margin-bottom:5px; font-size:12.5px;}
+.onl-name-box input{width:100%; padding:9px 12px; font-size:15px;}
+.onl-name-box .onl-msg{min-height:16px; margin-top:6px; font-size:12px;}
+.onl-name-btns{display:flex; gap:10px; margin-top:12px;}
+.onl-name-btns .btn{flex:1 1 0; min-width:0; white-space:nowrap; padding:11px 10px;}
+
+/* ---- Botón "Mi plantilla" de puja / Reloj / sorteo: solo dentro de una sala online ---- */
+.squad-btn.onl-only{display:none;}
+body.onl-on .squad-btn.onl-only{display:inline-flex; align-items:center; justify-content:center;}
+body.onl-guest #squadModal{z-index:9800;}
+
+/* ---- Multijugador: la tabla de posiciones la puede ocultar/mostrar cualquiera (#sideHandle visible para invitados) ---- */
+
+/* ---- Multijugador: solo queda el botón "Volver al inicio" (el del chip de la sala); sin "Reiniciar partida" ni botones repetidos ---- */
+body.onl-on .restart-btn, body.onl-on .menu-btn, body.onl-on #marketMenuBtn{display:none !important;}
+
+/* ---- Invitado: navegación local de jornadas (← Jornada → ⟲ Actual) pegada a la izquierda, antes del espaciador ---- */
+body.onl-guest .matchday-nav > #prevMd{order:-4;}
+body.onl-guest .matchday-nav > .pill{order:-3;}
+body.onl-guest .matchday-nav > #nextMd{order:-2;}
+body.onl-guest .matchday-nav > #onlMdNow{order:-1;}
+body.onl-guest .matchday-nav > #onlMdNow[hidden]{display:none;}
+
+/* el invitado no oye efectos: solo ve el volumen de la música */
+body.onl-guest .ap-sfx{display:none;}

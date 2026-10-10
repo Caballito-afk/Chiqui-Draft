@@ -1,0 +1,16 @@
+{
+  "name": "chiquidraft",
+  "version": "2.0.0",
+  "description": "Chiqui Draft - Juego multijugador de fútbol con subastas, liga y copas",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["chiquidraft", "futbol", "multijugador", "draft", "socketio"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}

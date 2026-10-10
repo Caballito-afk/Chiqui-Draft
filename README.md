@@ -1,6 +1,6 @@
 # Chiqui Draft
 
-Abrí `index.html` en el navegador (funciona con doble clic, sin servidor).
+Encuentranos en `Chiqui-Draft.onrender.com`
 
 ## Estructura
 - `index.html` — solo el HTML de las pantallas y la carga ordenada de CSS y JS.

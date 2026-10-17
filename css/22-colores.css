@@ -1,0 +1,56 @@
+/* ==========================================================================
+   22 · Personalización del club (color)
+   Selector de color + botón con el número del equipo (ajustes, sala online y Anotador).
+   Reglas de Caldera: píldoras y sin sombras; la brasa aparece solo en el foco. El selector flota
+   sobre el contenido, así que lleva borde y fondo opaco en lugar de sombra.
+   ========================================================================== */
+.tag-btn{cursor:pointer; border:0; padding:0; font:inherit; position:relative;
+  transition:transform .25s cubic-bezier(.23,1,.32,1), outline-color .2s ease-out;
+  outline:2px solid transparent; outline-offset:2px;}
+.tag-btn::after{content:""; position:absolute; right:-3px; bottom:-3px; width:11px; height:11px; border-radius:50% !important;
+  background:var(--bg); border:1.5px solid var(--line-strong);
+  background-image:linear-gradient(135deg,transparent 45%,var(--text) 45% 55%,transparent 55%); opacity:.9;}
+@media (hover:hover) and (pointer:fine){ .tag-btn:hover{transform:scale(1.12); outline-color:var(--text);} }
+.tag-btn:active{transform:scale(.92);}
+.tag-btn:focus-visible{outline:2px solid var(--ember,#fc5000); outline-offset:3px;}
+
+.color-pop{
+  position:fixed; z-index:9000; width:min(300px,calc(100vw - 16px)); padding:16px;
+  background:var(--bg); color:var(--text); border:1.5px solid var(--line-strong); border-radius:24px !important;
+  animation:cpIn .18s cubic-bezier(.23,1,.32,1); transform-origin:top left;
+}
+.color-pop .cp-head{font-family:var(--f-display); font-size:16px; letter-spacing:.06em; text-transform:uppercase; margin:0 2px 12px;}
+.cp-grid{display:grid; grid-template-columns:repeat(8,1fr); gap:8px;}
+.cp-sw{aspect-ratio:1; width:100%; border:0; padding:0; border-radius:50% !important; cursor:pointer;
+  transition:transform .2s cubic-bezier(.23,1,.32,1), outline-color .15s ease-out; outline:2px solid transparent; outline-offset:2px;}
+@media (hover:hover) and (pointer:fine){ .cp-sw:not(:disabled):hover{transform:scale(1.18);} }
+.cp-sw:active{transform:scale(.9);}
+.cp-sw.sel{outline-color:var(--text);}
+.cp-sw:focus-visible{outline-color:var(--ember,#fc5000);}
+.cp-sw.used{opacity:.25; cursor:not-allowed; position:relative;}
+.cp-sw.used::after{content:""; position:absolute; inset:0; border-radius:50%; background:linear-gradient(135deg,transparent 46%,var(--bg) 46% 54%,transparent 54%);}
+.cp-foot{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:14px;}
+.cp-custom{display:inline-flex; align-items:center; gap:10px; cursor:pointer; font-size:14px;}
+.cp-custom input[type=color]{width:34px; height:34px; padding:0; border:1.5px solid var(--line-strong); border-radius:50% !important; background:none; cursor:pointer;}
+.cp-custom input[type=color]::-webkit-color-swatch-wrapper{padding:0;}
+.cp-custom input[type=color]::-webkit-color-swatch{border:0; border-radius:50%;}
+.cp-custom input[type=color]::-moz-color-swatch{border:0; border-radius:50%;}
+.cp-custom input[type=color]:focus-visible{outline:2px solid var(--ember,#fc5000); outline-offset:2px;}
+.cp-reset{font-size:13px; padding:7px 14px; border:1.5px solid var(--line-strong); border-radius:999px !important; background:transparent; color:var(--text); cursor:pointer;}
+.cp-reset:hover{border-color:var(--text);}
+.cp-hint{margin-top:12px; font-size:12.5px; line-height:1.4; color:var(--muted);}
+.cp-msg{min-height:0; margin-top:8px; font-size:13px; color:var(--red-text,#ff8a8f);}
+.cp-msg:empty{display:none;}
+@keyframes cpIn{from{opacity:0; transform:scale(.95) translateY(-4px);} to{opacity:1; transform:none;}}
+@media (prefers-reduced-motion:reduce){ .color-pop{animation:none;} .tag-btn,.cp-sw{transition:none;} }
+
+/* ---------- Anotador: botón de color y punto del club ---------- */
+.an-name-n.tag-btn{width:32px; height:32px; display:grid; place-items:center; border-radius:50% !important; text-align:center; font-size:13px; font-weight:600;}
+.an-dot{display:inline-block; flex:none; width:10px; height:10px; margin-right:9px; border-radius:50% !important; vertical-align:middle; position:relative; top:-1px;}
+.an-home .an-dot{margin-right:0; margin-left:9px; order:2;}
+.an-home{display:flex; justify-content:flex-end; align-items:center;}
+.an-away{display:flex; align-items:center;}
+.an-table td.nm{white-space:nowrap;}
+.an-tn{display:flex; align-items:center;}
+.an-champ-n{display:flex; align-items:center;}
+.an-champ-n .an-dot{width:.42em; height:.42em; margin-right:.3em; top:0;}

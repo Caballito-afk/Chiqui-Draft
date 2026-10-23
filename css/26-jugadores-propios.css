@@ -1,0 +1,56 @@
+/* =========================================================
+   JUGADORES PROPIOS (editor + tarjeta de Ajustes)
+========================================================= */
+.cp-overlay{display:none; position:fixed; inset:0; z-index:250; align-items:center; justify-content:center; padding:18px; background:rgba(4,8,14,.72); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);}
+.cp-overlay.open{display:flex; animation:cfFade .15s ease;}
+.cp-overlay.closing{animation:cfFadeOut .14s ease forwards;}
+.cp-overlay.closing .cp-box{animation:cfPopOut .14s ease forwards;}
+.cp-box{width:100%; max-width:560px; max-height:calc(100vh - 36px); max-height:calc(100dvh - 36px); display:flex; flex-direction:column; background:var(--card); color:var(--text); border:1px solid var(--border); border-radius:14px; padding:22px 22px 18px; box-shadow:0 20px 60px rgba(0,0,0,.55); animation:cfPop .18s ease;}
+.cp-title{font-family:'Jost','Inter',system-ui,sans-serif; font-size:26px; font-weight:500; letter-spacing:.4px; line-height:1.1;}
+.cp-sub{font-size:13.5px; line-height:1.45; color:var(--muted); margin:6px 0 14px;}
+
+.cp-form{display:grid; grid-template-columns:minmax(0,1fr) 84px 190px; gap:10px;}
+.cp-f label{margin-bottom:4px;}
+.cp-error{margin-top:10px; font-size:13px; font-weight:600; color:#ff6b6b;}
+.cp-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
+.cp-count{margin:16px 0 8px; font-size:12.5px; color:var(--muted);}
+
+.cp-list{flex:1 1 auto; min-height:60px; overflow-y:auto; border:1px solid var(--border); border-radius:10px; background:var(--surface);}
+.cp-list:empty{display:none;}
+.cp-row{display:flex; align-items:center; gap:10px; padding:8px 10px; border-bottom:1px solid var(--border);}
+.cp-row:last-child{border-bottom:0;}
+.cp-row.editing{background:var(--card2);}
+.cp-pos{flex:0 0 40px; font-size:12px; font-weight:800; letter-spacing:.5px; color:var(--muted); text-align:center;}
+.cp-name{flex:1 1 auto; min-width:0; font-size:14.5px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.cp-ovr{flex:0 0 34px; text-align:right; font-size:17px; font-weight:800; font-variant-numeric:tabular-nums;}
+.cp-ovr.tier-silver{color:#c3cad4;} .cp-ovr.tier-yellow{color:#f5d31a;} .cp-ovr.tier-orange{color:#ff8a1f;} .cp-ovr.tier-red{color:#ff3b3b;}
+:root[data-theme="light"] .cp-ovr.tier-silver{color:#7b8696;}
+.btn.cp-del{color:#ff6b6b;}
+.btn.cp-del:hover{border-color:#ff6b6b;}
+.cp-footer{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:14px;}
+.cp-footer #cpDone{margin-left:auto;}
+
+/* estrella en lugar de la bandera para los jugadores propios (puja y reloj) */
+.cflag-star{display:inline-flex; align-items:center; justify-content:center; font-size:1.1em; line-height:1; color:var(--gold,#f0b90b);}
+
+@media (max-width:560px){
+  .cp-form{grid-template-columns:minmax(0,1fr) 90px;}
+  .cp-f-pos{grid-column:1 / -1;}
+  .cp-box{padding:18px 16px 14px;}
+  .cp-row{gap:8px; padding:8px; flex-wrap:wrap;}
+  .cp-pos{flex-basis:34px;}
+  .cp-name{flex:1 1 calc(100% - 100px);}      /* el nombre ocupa la primera línea; Editar/Borrar bajan a la segunda */
+  .cp-row [data-cp-edit]{margin-left:auto;}
+}
+@media (prefers-reduced-motion:reduce){
+  .cp-overlay.open,.cp-box,.cp-overlay.closing,.cp-overlay.closing .cp-box{animation:none;}
+}
+
+/* Predio online: estado de cada club en la pantalla de creación */
+.onl-player .bd.pd-ok{color:#4ade80; border-color:#4ade80;}
+#onl-predio .cp-list{max-height:340px;}
+#onl-predio .card{margin-bottom:14px;}
+
+/* País del jugador (opcional): ocupa su propia fila */
+.cp-f-country{grid-column:1 / -1;}
+.cp-name small{font-weight:500; color:var(--muted); font-size:12px;}

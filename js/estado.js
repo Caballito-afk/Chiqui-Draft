@@ -1,0 +1,44 @@
+/* =========================================================
+   ESTADO
+========================================================= */
+let state = {
+  game:"puja", // puja | random | reloj (minijuego) | custom (Predio local: jugadores creados y asignados a mano a cada equipo)
+  mode:"ia", // ia | local
+  comp:"leaguecup", // league | cup | leaguecup ("Copa de la liga")
+  doubleLeg:false, // ida y vuelta (en Copa de la liga: solo la fase eliminatoria)
+  leagueDouble:false, // solo Copa de la liga: la fase de liga también a doble vuelta
+  finalDouble:false, // la final a ida y vuelta (opción aparte, independiente de doubleLeg / leagueDouble)
+  useMarket:false, // mercado de pases antes del torneo (por defecto: sin mercado)
+  botLevel:"regular", // dificultad de los bots (solo Puja, El Reloj y Mercado): facil | regular | dificil
+  botOffers:true, // con bots + mercado: los bots pueden ofertar por tus jugadores
+  trollMode:"off", // jugadores troll: on (con troll) | off (sin troll) | only (solo troll)
+  customMode:"off", // jugadores creados por el usuario: off (Normal) | only (Predio: se juega solo con ellos)
+  customSource:"new", // Predio local: new (se crean antes de empezar) | saved (se usan los ya guardados)
+  customRosters:null, // modo Custom: [[ids de jugador]] por equipo, armados a mano (solo se usa al arrancar)
+  predioPool:null, // Predio local con "crear ahora": lista [[nombre,pos,media,país]] de esta partida (se guarda con el torneo)
+  relegations:null, // descensos en el modo Liga: null = automático (según equipos, 0 a 3) | 0..5
+  marketSecs:180, // duración del mercado de pases online en segundos (0 = sin límite)
+  useFreeMarket:true, // dentro del mercado: pestaña "Jugadores Libres" (jugadores que no salieron en la puja)
+  playMode:"all", // eliminatorias: all (todos a la vez) | one (uno por uno)
+  numTeams:6,
+  bidSecs:10, // Puja: segundos por puja / por turno
+  skipUses:null, // Un jugador (Puja y El Reloj): veces que se puede usar "Pasar x10". null = infinitas, 0 = ninguna
+  passLimit:null, // Puja multijugador: veces que cada equipo puede plantarse (saltear) en toda la subasta. null = infinitas, 0 = ninguna
+  clockSecs:8, // El Reloj: segundos que tarda el precio en bajar
+  bidInfo:"pos,country", // Puja y El Reloj: datos que se ven del jugador mientras se puja ("pos", "country" o ambos; siempre al menos uno). Media y club nunca se ven
+  startBudget:1000, // presupuesto inicial por equipo (en M)
+  squadSize:11, // 11 (Fútbol 11) | 5 (Fútbol 5)
+  teams:[], // {id,name,color,isHuman,roster:[playerIds],budget}
+  auction:null,
+  mini:null, // estado del minijuego El Reloj
+  fixture:[], // array of matchdays -> array of matches
+  currentMd:0,
+  standings:{}, // teamId -> stats
+  scorers:{}, // playerId -> {goals, assists, cs, extra}
+  statsView:"goals", // tabla de jugadores: goals | assists
+  playoffs:null,
+  champions:false, // modo Champions/Libertadores: fase de grupos de 4 + eliminatorias (internamente comp="leaguecup")
+  groups:null, // [[teamId,...],...]
+  awayGoals:false, // regla del gol de visitante (ida y vuelta)
+  champET:true // true: prórroga + penales; false: directo a penales
+};

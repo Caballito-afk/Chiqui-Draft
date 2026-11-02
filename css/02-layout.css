@@ -1,0 +1,92 @@
+/* Sidebar y estructura general */
+/* ---- Sidebar ---- */
+.sidebar{
+  width:230px; flex-shrink:0; background:var(--surface); border-right:1px solid var(--border);
+  padding:22px 16px; display:flex; flex-direction:column; gap:28px;
+}
+.brand{display:flex; align-items:center; gap:10px; padding:0 4px;}
+.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--grass),var(--grass-dark)); display:flex;align-items:center;justify-content:center; font-size:18px;}
+.brand-name{font-family:'Barlow Condensed'; font-size:22px; font-weight:800; line-height:1;}
+.brand-sub{font-size:11px; color:var(--muted-2); text-transform:uppercase; letter-spacing:1.5px;}
+
+.steps{display:flex; flex-direction:column; gap:4px;}
+.step{
+  display:flex; align-items:center; gap:12px; padding:10px 10px; border-radius:8px; color:var(--muted);
+  font-size:14px; font-weight:600; border:1px solid transparent;
+}
+.step .num{
+  width:24px;height:24px;border-radius:50%; background:var(--card2); color:var(--muted);
+  display:flex;align-items:center;justify-content:center; font-size:12px; font-family:'Barlow Condensed'; flex-shrink:0;
+}
+.step.active{color:var(--text); background:var(--card); border-color:var(--border);}
+.step.active .num{background:var(--grass); color:#04150b;}
+.step.done .num{background:var(--grass-dark); color:#dffff0;}
+.step.done{color:var(--text);}
+
+.sidebar-foot{margin-top:auto; font-size:12px; color:var(--muted-2); padding:0 4px;}
+
+/* ---- Main ---- */
+.main{flex:1; min-width:0; padding:26px 30px 60px; max-width:1200px; margin:0 auto; width:100%;}
+.topbar{display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin-bottom:22px; flex-wrap:wrap;}
+.topbar h1{font-size:30px; margin:0;}
+.topbar .desc{color:var(--muted); font-size:14px; margin-top:2px;}
+/* Botón de jugar de la fase eliminatoria: siempre justo debajo del título, sin importar el ancho ni el texto de la descripción */
+.topbar .pf-play{margin:8px 0 6px;}
+.topbar .pf-play .btn{display:inline-block;}
+.pill{display:inline-flex; align-items:center; gap:6px; background:var(--card); border:1px solid var(--border); padding:6px 12px; border-radius:999px; font-size:13px; color:var(--muted);}
+.pill b{color:var(--text);}
+.pill.gold{border-color:rgba(240,185,11,.35); color:var(--gold);}
+
+.screen{display:none;}
+.screen.active{display:block; animation:fade .25s ease;}
+@keyframes fade{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;}}
+
+.card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:20px;}
+.card + .card{margin-top:16px;}
+.grid{display:grid; gap:16px;}
+.grid.cols-2{grid-template-columns:1fr 1fr;}
+.grid.cols-3{grid-template-columns:repeat(3,1fr);}
+@media (max-width:900px){.grid.cols-2,.grid.cols-3{grid-template-columns:1fr;}}
+
+label{font-size:13px; color:var(--muted); font-weight:600; display:block; margin-bottom:6px;}
+input[type=text],input[type=number],select{
+  width:100%; background:var(--surface); border:1px solid var(--border); color:var(--text);
+  padding:10px 12px; border-radius:8px; font-size:14px; outline:none;
+}
+input:focus,select:focus{border-color:var(--grass);}
+
+.btn{
+  background:var(--card2); color:var(--text); border:1px solid var(--border); padding:10px 18px;
+  border-radius:8px; font-size:14px; font-weight:600; transition:.15s;
+}
+.btn:hover{border-color:var(--muted-2);}
+.btn.primary{background:var(--grass); border-color:var(--grass); color:#04150b;}
+.btn.primary:hover{background:#2ee071;}
+.btn.gold{background:var(--gold); border-color:var(--gold); color:#241a00;}
+.btn:disabled{opacity:.4; cursor:not-allowed;}
+.btn.sm{padding:6px 12px; font-size:13px;}
+.btn.block{width:100%;}
+.btn-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;}
+
+.mode-options{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+.mode-options-3{grid-template-columns:repeat(3,1fr);}
+.mode-options-4{grid-template-columns:repeat(4,1fr);}
+.mode-options-time{grid-template-columns:repeat(auto-fit,minmax(110px,1fr));}
+@media (max-width:640px){.mode-options-4{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:640px){.mode-options{grid-template-columns:1fr;}}
+.opt-card{
+  border:1.5px solid var(--border); background:var(--surface); border-radius:10px; padding:16px; cursor:pointer;
+}
+.opt-card.sel{border-color:var(--grass); background:rgba(53,209,124,.07);}
+.opt-card .t{font-weight:700; font-size:15px; margin-bottom:4px;}
+.opt-card .d{font-size:12.5px; color:var(--muted);}
+
+.count-row{display:flex; align-items:center; gap:14px;}
+.count-btn{width:38px;height:38px;border-radius:8px;background:var(--card2);border:1px solid var(--border);color:var(--text);font-size:18px;}
+.count-val{font-family:'Barlow Condensed'; font-size:30px; font-weight:800; min-width:40px; text-align:center;}
+
+.team-row{display:flex; align-items:center; gap:10px; margin-bottom:8px;}
+.team-row .tag{width:26px;height:26px;border-radius:6px;flex-shrink:0; display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800; color:#04150b;}
+.human-badge{font-size:10px; padding:2px 7px; border-radius:5px; background:rgba(91,141,239,.18); color:var(--blue); border:1px solid rgba(91,141,239,.35); flex-shrink:0;}
+.cpu-badge{font-size:10px; padding:2px 7px; border-radius:5px; background:var(--card2); color:var(--muted); border:1px solid var(--border); flex-shrink:0;}
+

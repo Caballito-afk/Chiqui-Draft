@@ -113,6 +113,7 @@ La pantalla es una lista de filas: a la izquierda el nombre del ajuste y a la de
 | **Copa de la liga** | Fase de liga (todos contra todos) y después eliminatorias con los mejores clasificados. |
 | **Liga** | Todos contra todos. El primero de la tabla es el campeón. |
 | **Champions / Libertadores** | Fase de grupos de 4 equipos y playoffs. |
+| **Chiqui-mafia** | Copa de la liga con 2 zonas sorteadas, fecha interzona y cruces entre zonas (desde 4 equipos). |
 | **Copa** | Solo eliminatorias con cuadro sorteado. |
 
 ### Estilo Champions / Libertadores (solo si se elige Champions)
@@ -163,7 +164,7 @@ Sin límite, 10, 5, 3, 1 o ninguna.
 **Fácil** (se equivocan y reaccionan lento), **Regular** (valoran bien, a veces fallan) o **Difícil** (calculan, cuidan la plata y no perdonan). Afecta la Puja, El Reloj y el Mercado de pases (ver [sección 7](#7-mercado-de-pases)).
 
 ### Cantidad de participantes y nombres
-- De **2 a 16** equipos (Champions: 8, 12 o 16). Debajo se indican los partidos por equipo, las rondas o cuántos clasifican.
+- De **2 a 16** equipos (Champions: 8, 12 o 16; Chiqui-mafia: mínimo 4). Debajo se indican los partidos por equipo, las rondas o cuántos clasifican.
 - Cada equipo tiene un campo de nombre. Tocar el **número del equipo** abre el editor de club ([sección 15](#15-personalización-de-clubes)).
 - **Borrar nombres y estadios** vacía los nombres y los estadios (los colores se mantienen; un nombre vacío usa el original).
 - **Restaurar nombres, colores y estadios** vuelve todo a los valores de fábrica.
@@ -172,6 +173,7 @@ Sin límite, 10, 5, 3, 1 o ninguna.
 ### Resumen de partidos y clasificados según la cantidad de equipos
 - **Liga:** `(n − 1)` partidos por equipo (el doble con ida y vuelta).
 - **Copa de la liga:** con 2 equipos no hay liga, van directo a la final; con 3, el primero de la liga es campeón directo; con 4 a 6 clasifican 2 (final); con más, clasifica aproximadamente la mitad (nunca 6: con 11 o 12 equipos pasan 8).
+- **Chiqui-mafia:** clasifican los mismos equipos que en la Copa de la liga, repartidos entre las dos zonas (la mitad cada una; si la cantidad es impar, el cupo extra va a la zona cuyo primer no clasificado tenga mejor promedio de puntos por partido).
 - **Champions:** clasifican los 2 primeros de cada grupo; si eso no completa un cuadro, se suman los mejores terceros (por ejemplo con 12 equipos: 6 + 2 mejores terceros = 8).
 - **Copa:** todos entran; si la cantidad no es potencia de 2, algunos pasan directo en la primera ronda (*bye*).
 
@@ -256,9 +258,10 @@ Un botón por equipo humano, con su presupuesto, para elegir con quién se opera
 
 ## 8. Sorteo
 
-Hay una pantalla de sorteo animada en **Champions** (grupos) y **Copa** (cruces de la primera ronda), cuando hay 3 o más equipos. El resultado ya está definido; la animación solo lo revela. Se puede **saltar la animación** o **Continuar**.
+Hay una pantalla de sorteo animada en **Champions** (grupos), **Chiqui-mafia** (zonas) y **Copa** (cruces de la primera ronda), cuando hay 3 o más equipos. El resultado ya está definido; la animación solo lo revela. Se puede **saltar la animación** o **Continuar**.
 
 - **Champions:** los grupos se sortean totalmente al azar, sin bombos: cualquiera puede enfrentarse a cualquiera.
+- **Chiqui-mafia:** se sortean las dos zonas (la A con un equipo más si la cantidad es impar).
 - **Copa:** los cruces se sortean al azar.
 
 ---
@@ -291,6 +294,11 @@ La tabla va en una **barra lateral** que se puede ocultar y mostrar. Las filas s
 
 En **Liga** se marcan además los equipos que descienden y se muestra el campeón.
 
+### Chiqui-mafia: fase de zonas
+- Dos zonas (**Zona A y Zona B**), cada una con su tabla. Cada equipo juega solo contra los de su zona.
+- La **anteúltima jornada es la fecha interzona**: cada equipo enfrenta a uno de la otra zona (elegido al azar; si sobra uno, descansa). Esos partidos suman en la tabla de su zona. Se avisa con la etiqueta «Fecha interzona».
+- Con ida y vuelta de liga, la interzona sigue siendo una sola fecha. Si las zonas tienen distinto tamaño, la más chica juega menos partidos.
+
 ### Champions: fase de grupos
 - Grupos de 4 equipos, cada uno con su propia tabla (**Grupo A, B, C…**).
 - Clasifican los 2 primeros de cada grupo y, si hace falta, los mejores terceros (comparados por puntos, diferencia de gol y goles a favor).
@@ -304,6 +312,8 @@ En Un jugador, si tu equipo ya no puede clasificar o queda afuera, aparece un ca
 ## 10. Fase eliminatoria y Copa
 
 ### Cuadro
+- Los equipos que pasan directo a la ronda siguiente no tienen texto de *bye*: su lugar en la primera ronda queda vacío y el equipo aparece directamente en el cruce siguiente.
+- En **Chiqui-mafia** la cantidad de clasificados es la de la Copa de la liga y los cruces de la primera ronda son entre zonas: el 1.º de una zona contra el último clasificado de la otra, el 2.º contra el penúltimo, y así. Los mejor sembrados reciben bye si hace falta; en rondas siguientes pueden cruzarse equipos de la misma zona.
 - Los clasificados se **siembran** según la tabla de la liga: 1.º contra el último, 2.º contra el penúltimo, etc. Si no completan un cuadro, los mejor sembrados pasan directo (*bye*).
 - El **mejor sembrado es el local**. En ida y vuelta, el mejor sembrado abre de visitante y **cierra de local**.
 - En **Champions** no se cruzan equipos del mismo grupo si se puede evitar, y es local el que sumó más puntos en la fase de grupos.
@@ -552,14 +562,14 @@ Dentro de una sala (sala de espera, puja, mercado, liga, partidos en vivo y elim
 Modo **sin puja ni simulación**: se elige el campeonato y la cantidad de equipos, se escriben los nombres y **cada resultado lo carga la persona a mano**. Sirve para llevar un torneo real o una liga entre amigos. Es independiente del resto del juego, usa su propio estado y se guarda solo en el navegador.
 
 ### Configuración
-- **Campeonato:** Copa de la liga, Liga, Champions / Libertadores o Copa (el cuadro de la Copa se arma por orden de la lista, o por sorteo animado si se usa el sorteo).
+- **Campeonato:** Copa de la liga, Liga, Champions / Libertadores, Chiqui-mafia (mínimo 4 equipos) o Copa (el cuadro de la Copa se arma por orden de la lista, o por sorteo animado si se usa el sorteo).
 - **Cantidad de equipos:** hasta 16.
 - **Nombres:** **Mezclar orden** y **Borrar nombres**. Cada equipo puede tener sus colores (toque en el número).
 - **Descensos** (Liga), **fase de liga o grupos** (solo ida / ida y vuelta), **cruces eliminatorios** (partido único / ida y vuelta), **final** (partido único / ida y vuelta) y **regla del gol de visitante** (Champions).
 
 ### Funcionamiento
 - Mismas reglas que el modo simulado: clasificados de Copa de la liga y de Champions, byes, siembra del cuadro, ida y vuelta, final doble y gol de visitante.
-- **Sorteo animado** para Champions (grupos) y Copa (cruces), con el orden guardado en la partida.
+- **Sorteo animado** para Champions (grupos), Chiqui-mafia (zonas) y Copa (cruces), con el orden guardado en la partida.
 - La **tabla de posiciones** va en la barra lateral (en Champions, una tabla por grupo), con zonas de clasificación, ya clasificado, eliminado, mejor tercero y campeón/descenso, igual que en el modo simulado.
 - En las series de ida y vuelta con global empatado se pregunta **quién ganó por penales**.
 - Cada club muestra su color en partidos, tabla y cruces.

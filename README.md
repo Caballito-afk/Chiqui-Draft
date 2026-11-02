@@ -395,6 +395,7 @@ La fase de liga y la de grupos se simulan directamente por jornada (sin relato).
 - Aproximadamente el **16 % de los goles** se revisan, y la decisión es **50/50**.
 - En el relato en vivo el gol aparece y el marcador sube; unos segundos después se anuncia «VAR: se revisa el gol de…» (parpadea) y, finalmente, **gol válido** o **GOL ANULADO** con su motivo (fuera de juego, falta previa o mano). Si se anula, el marcador vuelve atrás y el gol queda tachado en la lista.
 - Un gol anulado **no suma al marcador ni a las estadísticas** (goleadores y asistencias), así que puede cambiar si hay prórroga o penales. También se revisan los goles de la prórroga.
+- El gol y su revisión salen **seguidos**: nada (córner, otra jugada, otro gol) se cuela entre el gol y el VAR, y el reloj del partido se frena unos segundos mientras revisa. El tiempo perdido se **suma al adicional** del período, salvo que el gol ya sea en el adicional (no se suma nada) o en el último minuto del período (se revisa y termina el tiempo o el partido).
 - De vez en cuando el VAR llama al árbitro por un posible penal y lo desestima.
 - Cada momento tiene su sonido (tensión al empezar la revisión, gol al confirmarse y un sonido de rechazo al anularse).
 
